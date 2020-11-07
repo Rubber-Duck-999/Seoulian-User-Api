@@ -102,7 +102,8 @@ class Access_Db():
             if user_request["username"] is not None:
                 cursor.execute("SELECT * FROM users WHERE username=%s", user_request['username'])
                 row = cursor.fetchone()
-                print(row)
+                string = validation.convertUser(row)
+                return status.return_user(string)
             else:
                 return status.failure_parameters()
 

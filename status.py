@@ -1,5 +1,11 @@
 import json
 
+def return_user(user_found):
+    returned_user = json.dumps(user_found.__dict__, default=str)
+    return {
+        'statusCode': 200,
+        'body': returned_user
+    }
 
 def success():
     return {

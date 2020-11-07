@@ -11,9 +11,15 @@ def handler(event, context):
         if "GET" in method:
             print("Get Request")
             return getUserPreferences(event)
+        elif "PUT" in method:
+            print("Update User")
+            return status.success()
+
     elif 'triggerSource' in event:
-        print(event)
-        return createUser(event)
+        if event['triggerSource'] == "PostConfirmation_ConfirmSignUp":
+            createUser(event)
+        print("Finishing up")
+        return event
 
 def getUserPreferences(event):
     if 'queryStringParameters' in event and 'preferences' in event["queryStringParameters"]:
@@ -28,15 +34,13 @@ def getUserPreferences(event):
     else:
         return status.failure_parameters()
 
-
 def createUser(event):
     if 'queryStringParameters' in event and 'user' in event["queryStringParameters"]:
         # Check we have parameters
         message = event["queryStringParameters"]["user"]
         try:
             db = access.Access_Db()
-            return status.success()
-            #return db.createUser(message)
+            return db.createUser(message)
         except ValueError:
             print("Status was not provided")
             return status.failure_parameters()   

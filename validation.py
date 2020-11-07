@@ -5,12 +5,12 @@ class User():
     def __init__(self):
         print("Creating New User")
         self.error = False
-        self.username = None
-        self.email = None
-        self.dob = None
-        self.firstName = None
-        self.lastName = None
-        self.createdDate = None
+        self.username = ""
+        self.email = ""
+        self.dob = ""
+        self.firstName = ""
+        self.lastName = ""
+        self.createdDate = ""
 
 
 def newUser(user):
@@ -22,12 +22,26 @@ def newUser(user):
         user['userAttributes']['lastName'] or
         user['userAttributes']['createdDate']
     ) is None:
+        new_user.error = True
+    else:
+        new_user.email = user['userAttributes']['email']
+        new_user.username = user['userAttributes']['username']
+        new_user.dob = user['userAttributes']['dob']
+        new_user.firstName = user['userAttributes']['firstName']
+        new_user.lastName = user['userAttributes']['lastName']
+        new_user.createdDate = user['userAttributes']['createdDate']
+    return new_user
+
+def convertUser(row):
+    new_user = User()
+    if (row[0] or row[1] or row[2] or row[3] or row[4] or row[5]) is None:
         user.error = True
     else:
-        user.email = user['userAttributes']['email']
-        user.username = user['userAttributes']['username']
-        user.dob = user['userAttributes']['dob']
-        user.firstName = user['userAttributes']['firstName']
-        user.lastName = user['userAttributes']['lastName']
-        user.createdDate = user['userAttributes']['createdDate']
-    return user    
+        new_user.id = row[0]
+        new_user.email = row[1]
+        new_user.username = row[2]
+        new_user.dob = row[3]
+        new_user.firstName = row[4]
+        new_user.lastName = row[5]
+        new_user.createdDate = row[6]
+    return new_user 
