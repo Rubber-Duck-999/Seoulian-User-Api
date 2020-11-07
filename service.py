@@ -42,13 +42,12 @@ def getUserPreferences(event):
         return status.failure_parameters()
 
 def createUser(event):
-    print(event["request"])
-    if 'request' in event and 'username' in event:
+    if 'request' in event and 'userName' in event:
         # Check we have parameters
         new_user = New()
         new_user.email = event["request"]["userAttributes"]["email"]
         new_user.userId = event["request"]["userAttributes"]["sub"]
-        new_user.username = event["username"]
+        new_user.username = event["userName"]
         try:
             db = access.Access_Db()
             return db.createUser(new_user)

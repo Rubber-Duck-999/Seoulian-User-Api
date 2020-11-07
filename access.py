@@ -16,7 +16,6 @@ class Access_Db():
         self.conn = None
         try:
             self.rds_host = os.environ['RDS']
-            print(self.rds_host)
             self.name = os.environ['NAME']
             self.password = os.environ['PASSWORD']
             self.db_name = os.environ['DB']
@@ -92,8 +91,12 @@ class Access_Db():
             if user_request["username"] is not None:
                 cursor.execute("SELECT * FROM users WHERE username=%s", user_request['username'])
                 row = cursor.fetchone()
-                string = validation.convertUser(row)
-                return status.return_user(string)
+                if row is not None:
+                    string = validation.convertUser(row)
+                    return status.return_user(string)
+                else:
+                    return status.success()
+                
             else:
                 return status.failure_parameters()
 

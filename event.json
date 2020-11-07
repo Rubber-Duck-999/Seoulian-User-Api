@@ -4,18 +4,13 @@
   "source": "aws.events",
   "account": "{{account-id}}",
   "time": "1970-01-01T00:00:00Z",
-  "region": "eu-west-2",
+  "region": "us-east-1",
   "resources": ["arn:aws:events:us-east-1:123456789012:rule/ExampleRule"],
-  "request": {
-    "userAttributes": {
-      "email": "string",
-      "sub": "a2c21839-f9fc-49e3-be9a-16f5823d6705"
-    },
-    "clientMetadata": {
-      "string": "string"
+  "queryStringParameters": {
+    "preferences": {
+      "username": "TestUserInvoke"
     }
   },
-  "username": "TestUserInvoke",
-  "triggerSource": "PostConfirmation_ConfirmSignUp",
+  "httpMethod": "GET",
   "detail": {}
 }

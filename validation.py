@@ -34,6 +34,7 @@ def newUser(user):
 
 def convertUser(row):
     new_user = User()
+    print(row)
     if (row[0] or row[1] or row[2] or row[3] or row[4] or row[5]) is None:
         user.error = True
     else:
