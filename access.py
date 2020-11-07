@@ -24,13 +24,6 @@ class Access_Db():
         except:
             print("Environment variables not set")
 
-    def generateID(self):
-        print("Generating id")
-        random_data = os.urandom(128)
-        id = hashlib.md5(random_data).hexdigest()[:32]
-        return id
-
-
     def open_connection(self):
         """Connect to MySQL Database."""
         try:
@@ -47,14 +40,14 @@ class Access_Db():
         except pymysql.MySQLError as e:
             print("Error: ", e)
         
-    def createUser(self, user):
+    def createUser(self, new_user):
         print("Creating record in db")
-        if user == None:
+        if new_user == None:
             return status.failure_db()
 
-        new_user = validation.newUser(user)
-        if new_user.error == True:
-            return status.failure_parameters()
+        #new_user = validation.newUser(user)
+        #if new_user.error == True:
+        #    return status.failure_parameters()
         
         try:
             print("Accessing db")
@@ -66,11 +59,9 @@ class Access_Db():
             # Create a new record
             
 
-            sql = "INSERT INTO `users` (`id`, `email`, `username`, `dob`, "
-            "`firstName`, `lastName`, `createdDate`) "
-            "VALUES (%s, %s, %s, %s, %s, %s, '%s')"
-            insert_tuple = (self.generateID(), new_user['email'], new_user['username'], 
-            new_user['dob'], new_user['firstName'], new_user['lastName'], utilities.getTime())
+            sql = "INSERT INTO `users` (`id`, `email`, `username`, `dob`, `firstName`, `lastName`, `createdDate`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            insert_tuple = (new_user.userId, new_user.email, new_user.username, 
+            "test-dob", "first", "last", utilities.getTime())
             cursor.execute(sql, insert_tuple)
 
             # connection is not autocommit by default. So you must commit to save
@@ -83,7 +74,6 @@ class Access_Db():
             print("Error: ",e)
         else:
             self.conn.close()
-            return status.success()
 
     def getUserPreferences(self, user_request):
         print("Creating query for getting status record")

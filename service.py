@@ -4,6 +4,13 @@ import access
 import status
 import logging
  
+class New():
+
+    def __init__(self):
+        self.username = ""
+        self.email = ""
+        self.userId = ""
+
 def handler(event, context):
     # Handler function
     if 'httpMethod' in event:
@@ -35,12 +42,16 @@ def getUserPreferences(event):
         return status.failure_parameters()
 
 def createUser(event):
-    if 'queryStringParameters' in event and 'user' in event["queryStringParameters"]:
+    print(event["request"])
+    if 'request' in event and 'username' in event:
         # Check we have parameters
-        message = event["queryStringParameters"]["user"]
+        new_user = New()
+        new_user.email = event["request"]["userAttributes"]["email"]
+        new_user.userId = event["request"]["userAttributes"]["sub"]
+        new_user.username = event["username"]
         try:
             db = access.Access_Db()
-            return db.createUser(message)
+            return db.createUser(new_user)
         except ValueError:
             print("Status was not provided")
             return status.failure_parameters()   

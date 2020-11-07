@@ -15,7 +15,6 @@
       "string": "string"
     }
   },
-  "username": "TestUserInvoke",
   "triggerSource": "PostConfirmation_ConfirmSignUp",
   "detail": {}
 }
