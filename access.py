@@ -17,14 +17,14 @@ class Access_Db():
             return status.failure_db()
         
         dynamodb = boto3.resource('dynamodb')
-        table = dynamodb.Table('User-db')
+        table = dynamodb.Table('Seoulian-User')
         response = table.put_item(
         Item={
-                'UserId': str(uuid.uuid4()),
-                'email': user["email"],
-                'firstName': user["firstName"],
-                'lastName': user["lastName"],
-                'phone': user["phone"]
+                'Email': user["email"],
+                'FirstName': user["firstName"],
+                'LastName': user["lastName"],
+                'Phone': user["phone"],
+                'Country': user["country"]
             }
         )
         if response["ResponseMetadata"]["HTTPStatusCode"] == 200:

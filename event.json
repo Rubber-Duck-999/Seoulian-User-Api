@@ -10,8 +10,9 @@
     "user": {
       "email": "run@naver.com",
       "firstName": "simon",
-      "lastName": "crowther",
-      "phone": "3567482"
+      "lastName": "rubber-duck",
+      "phone": "3567482",
+      "country": "UK"
     }
   },
   "httpMethod": "POST",
