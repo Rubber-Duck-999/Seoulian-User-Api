@@ -7,14 +7,10 @@
   "region": "us-east-1",
   "resources": ["arn:aws:events:us-east-1:123456789012:rule/ExampleRule"],
   "queryStringParameters": {
-    "user": {
-      "email": "run@naver.com",
-      "firstName": "simon",
-      "lastName": "rubber-duck",
-      "phone": "3567482",
-      "country": "UK"
+    "preferences": {
+      "username": "testUser"
     }
   },
-  "httpMethod": "POST",
+  "httpMethod": "GET",
   "detail": {}
 }

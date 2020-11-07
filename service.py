@@ -3,7 +3,7 @@ import json
 import access
 import status
 import logging
-
+ 
 def handler(event, context):
     # Handler function
     if 'httpMethod' in event:
@@ -11,9 +11,9 @@ def handler(event, context):
         if "GET" in method:
             print("Get Request")
             return getUserPreferences(event)
-        elif "POST" in method:
-            print("Post Request")
-            return createUser(event)
+    elif 'triggerSource' in event:
+        print(event)
+        return createUser(event)
 
 def getUserPreferences(event):
     if 'queryStringParameters' in event and 'preferences' in event["queryStringParameters"]:
@@ -21,8 +21,7 @@ def getUserPreferences(event):
         request = event["queryStringParameters"]["preferences"]
         try:
             db = access.Access_Db()
-            db.getUserPreferences(request)
-            return status.success()
+            return db.getUserPreferences(request)
         except ValueError:
             print("Status was not provided")
             return status.failure_parameters()   
@@ -36,7 +35,8 @@ def createUser(event):
         message = event["queryStringParameters"]["user"]
         try:
             db = access.Access_Db()
-            return db.createUser(message)
+            return status.success()
+            #return db.createUser(message)
         except ValueError:
             print("Status was not provided")
             return status.failure_parameters()   

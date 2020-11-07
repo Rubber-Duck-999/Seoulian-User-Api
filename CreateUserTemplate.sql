@@ -1,0 +1,1 @@
+INSERT into users (`id`, `username`, `email`, `dob`, `firstName`, `lastName`, `createdDate`) VALUES ('0000000000000000', 'testUser', 'email.gamil.com', '1990/05/12', 'first', 'last', '1990/05/12 12:00:00'); 

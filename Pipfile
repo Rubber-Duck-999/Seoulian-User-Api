@@ -4,3 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pymysql = "*"
+datetime = "*"
+python-lambda = "*"
+Chalice = "*"
