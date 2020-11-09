@@ -1,4 +1,3 @@
-import status
 
 class User():
 
