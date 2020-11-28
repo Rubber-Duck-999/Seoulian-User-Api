@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import json
 import access
 import status
-import logging
  
 class New():
 
@@ -18,7 +16,7 @@ def handler(event, context):
         if "GET" in method:
             print("Get Request")
             return getUserPreferences(event)
-        elif "PUT" in method:
+        if "PUT" in method:
             print("Update User")
             return status.success()
 

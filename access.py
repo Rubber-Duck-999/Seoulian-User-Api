@@ -1,10 +1,6 @@
-import json
-import logging
-import uuid
 import status
 import os
 import pymysql
-import hashlib
 import validation
 import utilities
 
@@ -94,8 +90,7 @@ class Access_Db():
                 if row is not None:
                     string = validation.convertUser(row)
                     return status.return_user(string)
-                else:
-                    return status.success()
+                return status.success()
                 
             else:
                 return status.failure_parameters()
