@@ -58,9 +58,9 @@ class Access_Db():
             # Create a new record
             
 
-            sql = "INSERT INTO `users` (`id`, `email`, `username`, `dob`, `firstName`, `lastName`, `createdDate`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO `Users` (`UserID`, `Email`, `Username`, `DOB`, `FirstName`, `LastName`, `CreatedDate`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             insert_tuple = (new_user.userId, new_user.email, new_user.username, 
-            "test-dob", "first", "last", utilities.getTime())
+            new_user.dob, new_user.firstname, new_user.lastname, utilities.getTime())
             cursor.execute(sql, insert_tuple)
 
             # connection is not autocommit by default. So you must commit to save
@@ -89,7 +89,7 @@ class Access_Db():
             # Create a new record
 
             if user_request["username"] is not None:
-                cursor.execute("SELECT * FROM users WHERE username=%s", user_request['username'])
+                cursor.execute("SELECT * FROM Users WHERE Username=%s", user_request['username'])
                 row = cursor.fetchone()
                 if row is not None:
                     string = validation.convertUser(row)

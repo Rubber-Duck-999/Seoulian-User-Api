@@ -1,0 +1,10 @@
+CREATE TABLE Users ( 
+    UserID VARCHAR(32) NOT NULL,
+    Email VARCHAR(80) UNIQUE NOT NULL,
+    Username VARCHAR(30) UNIQUE NOT NULL,
+    DOB DATE,
+    FirstName VARCHAR(40),
+    LastName VARCHAR(40),
+	CreatedDate DATETIME,
+    PRIMARY KEY(UserID)
+);
